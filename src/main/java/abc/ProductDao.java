@@ -9,9 +9,9 @@ public class ProductDao {
 	
 	private static final String SQL_SELECT_ALL = "SELECT product_id, product_name, price FROM products ORDER BY product_id";
 	private static final String SQL_INSERT = "INSERT INTO products (product_name, price) VALUES ( ?, ?)";
-	
+	private static final String SQL_SELECT_WHERE_PRODUCT_ID = "SELECT * FROM products WHERE product_id = ?";
+
 	private Connection con;
-	
 	public ProductDao(Connection con) {
 		this.con = con;
 	}
@@ -31,6 +31,23 @@ public class ProductDao {
 		return list;
 	}
 	
+	public Product findByProductId(String productId) {
+		int productIdint = Integer.parseInt(productId);
+		   try (PreparedStatement stmt = con.prepareStatement(SQL_SELECT_WHERE_PRODUCT_ID)) {
+			   
+			   stmt.setInt(1, productIdint);
+		        
+		        ResultSet rs = stmt.executeQuery();
+		        
+		        if (rs.next()) {
+		            return new Product(rs.getInt("product_id"),rs.getString("product_name"),rs.getInt("price"));
+		        }
+		    } catch (SQLException e) {
+		        throw new RuntimeException(e);
+		    }
+		   return null;
+	}
+	
     public void register(Product product) {
 	try (PreparedStatement stmt = con.prepareStatement(SQL_INSERT)) {
 
@@ -42,5 +59,6 @@ public class ProductDao {
     }
 
   }
+   
 
 }

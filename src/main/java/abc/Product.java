@@ -18,7 +18,7 @@ public class Product {
 	    return productId;
 	}
 
-	public void setProduct_id(Integer productId) {
+	public void setProductId(Integer productId) {
 	    this.productId = productId;
 	}
 
@@ -26,7 +26,7 @@ public class Product {
 	    return productName;
 	}
 
-	public void setProduct_name(String productName) {
+	public void setProductName(String productName) {
 	    this.productName = productName;
 	}
 
