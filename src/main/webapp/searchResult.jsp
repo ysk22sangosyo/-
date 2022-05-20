@@ -21,5 +21,8 @@
   <td>${fn:escapeXml(product.price)}</td>
   </tr>
   </table>
+  <form action ="top.jsp">
+  <button type="submit">戻る</button>
+  </form>
 </body>
 </html>
